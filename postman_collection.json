@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "1e4875c0-0e30-4767-9847-9baf6aaeec7c",
+		"name": "API Automation Task",
+		"description": "# Introduction\nGET request to https://jsonplaceholder.typicode.com/users\nDisplaying all the user and company details\n\nFirst step is to do a GET request, and we get the JSON response with list of all users and companies for them.\n\nThree tests are included in collection. \nPostman test collection is used to create a tests.\nFirst test is to check the status code of the response, is it equal to 200 OK.\nUsing the pm.response object to check if the status is 200.\n\nSecond test case is verification if the response time is less then 200ms.\n\nThird test case is to Iterate over all elements of the json response body  And print out all company names ending in “Group” . First we get the response, and iterate through all the elements, and condition is added where is checked if company name from the response is ending with the \"Group\" using the endsWith() method in javaScript- if(jsonData[i].company.name.endsWith(\"Group\")===true){\n\nIf the response is true, then in console the companies names are displayed.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET request to all the users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99d1b591-40fe-411e-a696-1214e0b9063b",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							" // Verification of status code",
+							"pm.test(\"Status code is 200 OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// example using pm.expect()",
+							"pm.test(\" Validate the response time to be less than 200ms\", function () { ",
+							"   pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							" ",
+							"// Iterate over all elements of the json response body  And print out all company names ending in “ Group” ",
+							"pm.test(\" Print out company names ending in Group\", function () { ",
+							"pm.response.to.not.be.error;",
+							" pm.response.to.not.have.jsonBody(\"error\"); ",
+							"var jsonData = pm.response.json();",
+							"for (var i = 0; i < jsonData.length; i++) {",
+							"     if(jsonData[i].company.name.endsWith(\"Group\")===true){",
+							" console.log(jsonData[i].company.name)",
+							" }",
+							" }",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "GET request to list all the users"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "29a7aa4f-78a7-4c05-b816-ac862f8dc481",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4d834803-af0e-4be0-984b-3a10f55197d4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
